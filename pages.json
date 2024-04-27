@@ -19,7 +19,7 @@
 	"globalStyle": {
 		// "navigationBarTextStyle": "black",
 		// "navigationBarTitleText": "uni-app",
-		"titleImage": "https://github.com/life-soft/lively-frontend/blob/main/static/icons/logo.png",
+		"titleImage": "static/icons/logo.png",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#ffffff"
 	},
