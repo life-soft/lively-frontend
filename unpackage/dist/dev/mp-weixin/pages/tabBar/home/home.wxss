@@ -1,0 +1,18 @@
+
+.events-list.data-v-15dac74a {
+}
+.event-card.data-v-15dac74a {
+}
+.demo-uni-col.data-v-15dac74a {
+	height: 36px;
+	border-radius: 4px;
+}
+.dark_deep.data-v-15dac74a {
+	background-color: #99a9bf;
+}
+.dark.data-v-15dac74a {
+	background-color: #d3dce6;
+}
+.light.data-v-15dac74a {
+	background-color: #e5e9f2;
+}
