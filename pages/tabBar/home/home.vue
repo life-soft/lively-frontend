@@ -4,15 +4,15 @@
 			<view class="event-card" v-for="event in events" :key="event.id">
 				<image class="event-img" :src="event.eventBanner" mode="aspectFill"></image>
 				<view class="event-info">
-					<view class="event-time">周五, 12月23日 - 周日, 12月25日 · 16:30-18:00</view>
-					<view class="event-title">{{event.eventName}}测试测试测试测试测试测试测试测</view>
+					<text class="event-time">周五, 12月23日 - 周日, 12月25日 · 16:30-18:00</text>
+					<text class="event-title">{{event.eventName}}</text>
 					<view class="event-location">
 						<image class="icon" src="@/static/icons/location.png"></image>
-						<text>杭高院教学楼311</text>
+						<text class="location-text">杭高院教学楼杭高院教学楼杭高院教学楼杭高院教学楼杭高院教学楼</text>
 					</view>
 					<view class="event-organizer">
 						<image class="icon" src="@/static/icons/user.png"></image>
-						<text>软开社</text>
+						<text class="organizer-text">软开社软开社软开社软开社软开社软开社软开社软开社软开社软开社</text>
 					</view>
 				</view>
 				<view class="event-actions">
@@ -71,14 +71,14 @@ export default {
 	margin-right: 30rpx;
 }
 .event-card {
-	height: 220rpx;
+	height: 210rpx;
 	margin-top: 30rpx;;
 	margin-bottom: 60rpx;
 	display: flex;
 }
 .event-img {
-	height: 220rpx; 
-	width: 220rpx;
+	height: 210rpx; 
+	width: 210rpx;
 	object-fit: cover;
 	border-radius: 5px;
 }
@@ -95,26 +95,28 @@ export default {
 	color: $uni-color-primary;
 	font-weight: bold;
 	font-size: 27rpx;
+	width: 410rpx;
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis;
 }
 .event-title {
 	color: $uni-color-info-dark;
 	font-weight: bold;
 	font-size: 35rpx;
-	// max-height: 200rpx;
-	// overflow: hidden;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
 }
 .event-location {
-	color: $uni-color-info-light;
-	font-weight: bold;
-	font-size: 27rpx;
 	display: flex;
 	align-items: center;
 	flex-direction: row;	
 	gap: 10rpx;
 }
 .event-organizer {
-	color: $uni-color-info-light;
-	font-size: 27rpx;
 	display: flex;
 	align-items: center;
 	flex-direction: row;	
@@ -128,5 +130,22 @@ export default {
 .icon {
 	width: 27rpx;
 	height: 27rpx;
+}
+.location-text {
+	color: $uni-color-info-light;
+	font-weight: bold;
+	font-size: 27rpx;
+	width: 410rpx;
+	overflow: hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+}
+.organizer-text {
+	color: $uni-color-info-light;
+	font-size: 27rpx;
+	width: 310rpx;
+	overflow: hidden; 
+	white-space: nowrap; 
+	text-overflow: ellipsis;
 }
 </style>

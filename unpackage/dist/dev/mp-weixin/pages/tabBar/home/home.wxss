@@ -34,14 +34,14 @@
   margin-right: 30rpx;
 }
 .event-card.data-v-15dac74a {
-  height: 220rpx;
+  height: 210rpx;
   margin-top: 30rpx;
   margin-bottom: 60rpx;
   display: flex;
 }
 .event-img.data-v-15dac74a {
-  height: 220rpx;
-  width: 220rpx;
+  height: 210rpx;
+  width: 210rpx;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -58,24 +58,28 @@
   color: #ef756e;
   font-weight: bold;
   font-size: 27rpx;
+  width: 410rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .event-title.data-v-15dac74a {
   color: #333538;
   font-weight: bold;
   font-size: 35rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .event-location.data-v-15dac74a {
-  color: #626467;
-  font-weight: bold;
-  font-size: 27rpx;
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 10rpx;
 }
 .event-organizer.data-v-15dac74a {
-  color: #626467;
-  font-size: 27rpx;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -89,4 +93,21 @@
 .icon.data-v-15dac74a {
   width: 27rpx;
   height: 27rpx;
+}
+.location-text.data-v-15dac74a {
+  color: #626467;
+  font-weight: bold;
+  font-size: 27rpx;
+  width: 410rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.organizer-text.data-v-15dac74a {
+  color: #626467;
+  font-size: 27rpx;
+  width: 310rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
