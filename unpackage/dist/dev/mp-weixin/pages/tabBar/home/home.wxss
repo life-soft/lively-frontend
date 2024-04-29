@@ -30,9 +30,9 @@
   margin-right: 30rpx;
 }
 .event-card.data-v-15dac74a {
-  height: 210rpx;
-  margin-top: 30rpx;
-  margin-bottom: 50rpx;
+  height: 230rpx;
+  margin-top: 20rpx;
+  margin-bottom: 35rpx;
   display: flex;
   position: relative;
 }
@@ -40,7 +40,11 @@
   height: 210rpx;
   width: 210rpx;
   object-fit: cover;
-  border-radius: 5rpx;
+  border-radius: 10rpx;
+}
+.event-img-block.data-v-15dac74a {
+  display: flex;
+  align-items: center;
 }
 .event-info.data-v-15dac74a {
   margin-left: 30rpx;
@@ -49,7 +53,7 @@
   align-items: left;
   justify-content: center;
   flex-direction: column;
-  gap: 4rpx;
+  gap: 10rpx;
   left: 240rpx;
 }
 .event-time.data-v-15dac74a {
@@ -64,12 +68,14 @@
 .event-title.data-v-15dac74a {
   color: #333538;
   font-weight: bold;
-  font-size: 35rpx;
+  font-size: 38rpx;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-height: 1.2;
+  max-height: 300rpx;
 }
 .event-location.data-v-15dac74a {
   display: flex;
@@ -86,7 +92,7 @@
 .event-actions.data-v-15dac74a {
   position: absolute;
   right: -10rpx;
-  bottom: -15rpx;
+  bottom: -10rpx;
   display: flex;
   flex-direction: row;
   align-items: flex-end;

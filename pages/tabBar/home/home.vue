@@ -2,7 +2,9 @@
 	<view>
 		<view class="events-list">
 			<view class="event-card" v-for="event in events" :key="event.id">
-				<image class="event-img" :src="event.eventBanner" mode="aspectFill"></image>
+				<view class="event-img-block">
+					<image class="event-img" :src="event.eventBanner" mode="aspectFill"></image>
+				</view>
 				<view class="event-info">
 					<text class="event-time">{{event.eventTime}}</text>
 					<text class="event-title">{{event.eventName}}</text>
@@ -131,9 +133,9 @@ export default {
 	margin-right: 30rpx;
 }
 .event-card {
-	height: 210rpx;
-	margin-top: 30rpx;
-	margin-bottom: 50rpx;
+	height: 230rpx;
+	margin-top: 20rpx;
+	margin-bottom: 35rpx;
 	display: flex;
 	position: relative;
 }
@@ -141,7 +143,11 @@ export default {
 	height: 210rpx; 
 	width: 210rpx;
 	object-fit: cover;
-	border-radius: 5rpx;
+	border-radius: 10rpx;	
+}
+.event-img-block {
+	display: flex;
+	align-items: center;
 }
 .event-info {
 	margin-left: 30rpx;
@@ -150,7 +156,7 @@ export default {
 	align-items: left;
 	justify-content: center;
 	flex-direction: column;
-	gap: 4rpx;
+	gap: 10rpx;
 	left: 240rpx;
 }
 .event-time {
@@ -165,12 +171,14 @@ export default {
 .event-title {
 	color: $uni-color-info-dark;
 	font-weight: bold;
-	font-size: 35rpx;
+	font-size: 38rpx;
 	display: -webkit-box;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
+	line-height: 1.2;
+	max-height: 300rpx;
 }
 .event-location {
 	display: flex;
@@ -187,7 +195,7 @@ export default {
 .event-actions {
 	position: absolute;
 	right: -10rpx;
-	bottom: -15rpx;
+	bottom: -10rpx;
 	display: flex;
 	flex-direction: row;
 	align-items: flex-end;
