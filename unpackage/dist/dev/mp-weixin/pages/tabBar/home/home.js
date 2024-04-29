@@ -7,12 +7,55 @@ const _sfc_main = {
       events: []
     };
   },
+  computed: {},
   created() {
   },
   mounted() {
     this.getEvents();
   },
   methods: {
+    formatDatetime(eventStart, eventEnd) {
+      const start = new Date(eventStart);
+      const end = new Date(eventEnd);
+      const days = ["日", "一", "二", "三", "四", "五", "六"];
+      const startDay = days[start.getDay()];
+      const endDay = days[end.getDay()];
+      const startYear = start.getFullYear();
+      const endYear = end.getFullYear();
+      const startMonth = start.getMonth() + 1;
+      const endMonth = end.getMonth() + 1;
+      const startDayOfMonth = start.getDate();
+      const endDayOfMonth = end.getDate();
+      const startHours = start.getHours();
+      const endHours = end.getHours();
+      const startMinutes = start.getMinutes();
+      const endMinutes = end.getMinutes();
+      let formattedStartTime = "";
+      let formattedEndTime = "";
+      if (startHours < 10) {
+        formattedStartTime += "0";
+      }
+      if (endHours < 10) {
+        formattedEndTime += "0";
+      }
+      formattedStartTime += startHours + ":";
+      formattedEndTime += endHours + ":";
+      if (startMinutes < 10) {
+        formattedStartTime += "0";
+      }
+      if (endMinutes < 10) {
+        formattedEndTime += "0";
+      }
+      formattedStartTime += startMinutes;
+      formattedEndTime += endMinutes;
+      let formattedDate = "";
+      if (startDay == endDay && startMonth == endMonth && startYear == endYear) {
+        formattedDate = `周${endDay}, ${endMonth}月${endDayOfMonth}日 `;
+      } else {
+        formattedDate = `周${startDay}, ${startMonth}月${startDayOfMonth}日 - 周${endDay}, ${endMonth}月${endDayOfMonth}日`;
+      }
+      return `${formattedDate} · ${formattedStartTime}-${formattedEndTime}`;
+    },
     getEvents() {
       const apiUrl = "http://124.222.92.30:8080/system/event/list";
       common_vendor.index.request({
@@ -22,6 +65,9 @@ const _sfc_main = {
           if (res.statusCode === 200) {
             this.events = res.data.rows;
             console.log(this.events);
+            for (let i = 0; i < this.events.length; i++) {
+              this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd);
+            }
           } else {
             console.error("Error: Server returned status code:", res.statusCode);
           }
@@ -33,30 +79,21 @@ const _sfc_main = {
     }
   }
 };
-if (!Array) {
-  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
-}
-const _easycom_uni_icons = () => "../../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
-if (!Math) {
-  _easycom_uni_icons();
-}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($data.events, (event, k0, i0) => {
-      return {
+      return common_vendor.e({
         a: event.eventBanner,
-        b: common_vendor.t(event.eventName),
-        c: "15dac74a-0-" + i0,
-        d: event.id
-      };
+        b: common_vendor.t(event.eventTime),
+        c: common_vendor.t(event.eventName)
+      }, {}, {
+        e: event.id
+      });
     }),
     b: common_assets._imports_0,
     c: common_assets._imports_1,
-    d: common_vendor.t(""),
-    e: common_vendor.p({
-      fontFamily: "like"
-    })
+    d: common_assets._imports_2,
+    e: common_assets._imports_3
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-15dac74a"], ["__file", "/Users/luyihan/Documents/Projects/lively-frontend/pages/tabBar/home/home.vue"]]);

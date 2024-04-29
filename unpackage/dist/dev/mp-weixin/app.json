@@ -5,7 +5,7 @@
     "pages/tabBar/search/search"
   ],
   "window": {
-    "titleImage": "static/icons/logo.png",
+    "titleImage": "static/logo.png",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#ffffff"
   },

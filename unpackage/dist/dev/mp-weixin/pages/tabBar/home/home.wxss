@@ -25,10 +25,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-@font-face {
-  font-family: like;
-  src: url("static/icons/like.png");
-}
 .events-list.data-v-15dac74a {
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -36,14 +32,15 @@
 .event-card.data-v-15dac74a {
   height: 210rpx;
   margin-top: 30rpx;
-  margin-bottom: 60rpx;
+  margin-bottom: 50rpx;
   display: flex;
+  position: relative;
 }
 .event-img.data-v-15dac74a {
   height: 210rpx;
   width: 210rpx;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 5rpx;
 }
 .event-info.data-v-15dac74a {
   margin-left: 30rpx;
@@ -53,6 +50,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 4rpx;
+  left: 240rpx;
 }
 .event-time.data-v-15dac74a {
   color: #ef756e;
@@ -86,11 +84,16 @@
   gap: 10rpx;
 }
 .event-actions.data-v-15dac74a {
-  right: 0rpx;
-  bottom: 0rpx;
-  display: grid;
+  position: absolute;
+  right: -10rpx;
+  bottom: -15rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 20rpx;
 }
-.icon.data-v-15dac74a {
+.info-icon.data-v-15dac74a {
   width: 27rpx;
   height: 27rpx;
 }
@@ -110,4 +113,17 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.action-icon.data-v-15dac74a {
+  width: 30rpx;
+  height: 30rpx;
+  padding: 10rpx;
+  border-radius: 100rpx;
+}
+.action-img.data-v-15dac74a {
+  width: 30rpx;
+  height: 30rpx;
+}
+.hover.data-v-15dac74a {
+  background-color: #f0f0f0;
 }

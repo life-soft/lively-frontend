@@ -19,7 +19,7 @@
 	"globalStyle": {
 		// "navigationBarTextStyle": "black",
 		// "navigationBarTitleText": "uni-app",
-		"titleImage": "static/icons/logo.png",
+		"titleImage": "static/logo.png",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#ffffff"
 	},
