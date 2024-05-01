@@ -2,12 +2,15 @@
   "pages": [
     "pages/tabBar/home/home",
     "pages/tabBar/like/like",
-    "pages/tabBar/search/search"
+    "pages/tabBar/search/search",
+    "pages/event/event"
   ],
   "window": {
     "titleImage": "static/logo.png",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#ffffff"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#626467",

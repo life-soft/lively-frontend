@@ -67,6 +67,7 @@ const _sfc_main = {
             console.log(this.events);
             for (let i = 0; i < this.events.length; i++) {
               this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd);
+              this.events[i].userLike = false;
             }
           } else {
             console.error("Error: Server returned status code:", res.statusCode);
@@ -76,25 +77,56 @@ const _sfc_main = {
           console.error("Error fetching activities:", error);
         }
       });
+    },
+    gotoEventDetail(eventId) {
+      console.log("eventId", eventId);
+      common_vendor.index.navigateTo({
+        url: "/pages/event/event?id=" + encodeURIComponent(eventId),
+        animationType: "slide-in-right"
+      });
+    },
+    likeOrDislikeEvent(index) {
+      console.log("like or dislike event", this.events[index]);
+      this.events[index].userLike = this.events[index].userLike == false ? true : false;
     }
+  },
+  onShareAppMessage(res) {
+    let e = res.target.dataset.event;
+    console.log("share message", e);
+    return {
+      title: e.eventName,
+      path: "/pages/event/event?id=" + encodeURIComponent(e.eventId),
+      imageUrl: e.eventBanner
+    };
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.f($data.events, (event, k0, i0) => {
+    a: common_vendor.f($data.events, (event, index, i0) => {
       return common_vendor.e({
         a: event.eventBanner,
         b: common_vendor.t(event.eventTime),
-        c: common_vendor.t(event.eventName)
-      }, {}, {
-        e: event.id
+        c: common_vendor.t(event.eventName),
+        d: common_vendor.t(event.organizerName),
+        e: event,
+        f: common_vendor.o(() => {
+        }, index),
+        g: event.userLike
+      }, event.userLike ? {
+        h: common_assets._imports_3
+      } : {
+        i: common_assets._imports_4
+      }, {
+        j: common_vendor.o(($event) => $options.likeOrDislikeEvent(index), index),
+        k: common_vendor.o(($event) => $options.gotoEventDetail(event.eventId), index),
+        l: index
       });
     }),
     b: common_assets._imports_0,
     c: common_assets._imports_1,
-    d: common_assets._imports_2,
-    e: common_assets._imports_3
+    d: common_assets._imports_2
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-15dac74a"], ["__file", "/Users/luyihan/Documents/Projects/lively-frontend/pages/tabBar/home/home.vue"]]);
+_sfc_main.__runtimeHooks = 2;
 wx.createPage(MiniProgramPage);

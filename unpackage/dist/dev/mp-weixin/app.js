@@ -5,6 +5,7 @@ if (!Math) {
   "./pages/tabBar/home/home.js";
   "./pages/tabBar/like/like.js";
   "./pages/tabBar/search/search.js";
+  "./pages/event/event.js";
 }
 const _sfc_main = {
   onLaunch: function() {

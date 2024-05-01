@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="events-list">
-			<view class="event-card" v-for="event in events" :key="event.id">
+			<view class="event-card" @click="gotoEventDetail(event.eventId)" v-for="(event, index) in events" :key="index">
 				<view class="event-img-block">
 					<image class="event-img" :src="event.eventBanner" mode="aspectFill"></image>
 				</view>
@@ -10,21 +10,21 @@
 					<text class="event-title">{{event.eventName}}</text>
 					<view class="event-location">
 						<image class="info-icon" src="@/static/icons/location.png"></image>
-						<text class="location-text">杭高院教学楼杭高院教学楼杭高院教学楼杭高院教学楼杭高院教学楼</text>
+						<text class="location-text">初识测试测试初识测试测试初识测试测试</text>
 					</view>
 					<view class="event-organizer">
 						<image class="info-icon" src="@/static/icons/user.png"></image>
-						<text class="organizer-text">软开社软开社软开社软开社软开社软开社软开社软开社软开社软开社</text>
+						<text class="organizer-text">{{event.organizerName}}软开社软开社软开社软开社软开社软开社软开社软开社软开社软开社</text>
 					</view>
 				</view>
 				<view class="event-actions">
-					<view class="action-icon" hover-class="hover">
+					<button class="action-button" open-type="share" :data-event='event' hover-class="is-hover" @click.stop>
 						<image class="action-img" src="@/static/icons/share.png"></image>
-					</view>
-					<view class="action-icon" hover-class="hover">
-						<image class="action-img" src="@/static/icons/like.png"></image>
-						<image v-if="false" src="@/static/icons/like.png"></image>
-					</view>
+					</button>
+					<button class="action-button" hover-class="is-hover" @click.stop="likeOrDislikeEvent(index)">
+						<image v-if="event.userLike" class="action-img" src="@/static/icons/like-filled.png"></image>
+						<image v-else class="action-img" src="@/static/icons/like.png"></image>
+					</button>
 				</view>
 			</view>
 		</view>
@@ -105,23 +105,41 @@ export default {
 				method: 'GET', 
 				success: (res) => {
 					if (res.statusCode === 200) {
-						// 请求成功，更新 events 数组
 						this.events = res.data.rows
 						console.log(this.events)
 						for (let i = 0; i < this.events.length; i++) {
 							this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd)
+							this.events[i].userLike = false //TODO
 						}
 					} else {
-						// 服务器返回错误状态码
 						console.error('Error: Server returned status code:', res.statusCode)
 					}
 				},
 				fail: (error) => {
-					// 请求失败
 					console.error('Error fetching activities:', error)
 				}
 			});
 		},
+		gotoEventDetail(eventId) {
+			console.log("eventId", eventId)
+		    uni.navigateTo({
+				url: '/pages/event/event?id=' + encodeURIComponent(eventId),	    
+				animationType: "slide-in-right",
+		    });
+		},
+		likeOrDislikeEvent(index) {
+			console.log("like or dislike event", this.events[index])
+			this.events[index].userLike = this.events[index].userLike == false ? true : false
+		},
+	},
+	onShareAppMessage(res) {
+		let e = res.target.dataset.event
+		console.log("share message", e)
+		return {
+			title: e.eventName,
+			path: '/pages/event/event?id=' + encodeURIComponent(e.eventId),
+			imageUrl: e.eventBanner
+		}
 	}
 }
 
@@ -200,7 +218,7 @@ export default {
 	flex-direction: row;
 	align-items: flex-end;
 	justify-content: flex-end;
-	gap: 20rpx;
+	gap: 10rpx;
 }
 .info-icon {
 	width: 27rpx;
@@ -226,14 +244,26 @@ export default {
 .action-icon {
 	width: 30rpx;
 	height: 30rpx;
-	padding: 10rpx;
+	padding: 15rpx;
 	border-radius: 100rpx;
 }
 .action-img {
 	width: 30rpx;
 	height: 30rpx;
 }
-.hover {
+.action-button {
+	padding: 15rpx;
+	border-radius: 100rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+}
+.is-hover {
 	background-color: #f0f0f0;
+}
+button::after {
+	border: none;
 }
 </style>

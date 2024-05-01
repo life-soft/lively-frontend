@@ -14,14 +14,19 @@
 			"path": "pages/tabBar/search/search",
 			"style": {
 			}
+		},
+		{
+			"path": "pages/event/event",
+			"style": {
+			}
 		}
 	],
 	"globalStyle": {
-		// "navigationBarTextStyle": "black",
-		// "navigationBarTitleText": "uni-app",
 		"titleImage": "static/logo.png",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#ffffff"
+		"navigationBarBackgroundColor": "#ffffff",
+		"navigationBarTextStyle": "black",
+		"backgroundColor": "#ffffff",
+		"enablePullDownRefresh": true
 	},
 	"uniIdRouter": {},
 	"tabBar": {
