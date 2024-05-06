@@ -13,6 +13,12 @@ export default {
 		this.eventId = e.id;
 		console.log("id", id)
 	},
+	onShareAppMessage() {
+		
+	},
+	onShareTimeline() {
+		
+	}
 }
 </script>
 
