@@ -58,7 +58,6 @@ const _sfc_main = {
     eventDataProcess() {
       for (let i = 0; i < this.events.length; i++) {
         this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd);
-        this.events[i].userLike = false;
       }
     },
     gotoEventDetail(eventId) {
@@ -87,18 +86,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         }, index),
         g: event.userLike
       }, event.userLike ? {
-        h: common_assets._imports_3
+        h: common_assets._imports_3$1
       } : {
-        i: common_assets._imports_4
+        i: common_assets._imports_4$1
       }, {
         j: common_vendor.o(($event) => $options.likeOrDislikeEvent(index), index),
         k: common_vendor.o(($event) => $options.gotoEventDetail(event.eventId), index),
         l: index
       });
     }),
-    b: common_assets._imports_0,
-    c: common_assets._imports_1,
-    d: common_assets._imports_2
+    b: common_assets._imports_0$1,
+    c: common_assets._imports_1$1,
+    d: common_assets._imports_2$1
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-c69de29a"], ["__file", "/Users/luyihan/Documents/Projects/lively-frontend/components/eventCardList/eventCardList.vue"]]);

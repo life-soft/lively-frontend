@@ -1,7 +1,7 @@
 <template>
 	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer" @touchmove.stop.prevent="clear">
 		<view class="uni-drawer__mask" :class="{ 'uni-drawer__mask--visible': showDrawer && mask }" @tap="close('mask')" />
-		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}" :style="{width:drawerWidth+'px'}">
+		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}" :style="{width:drawerWidth+'rpx'}">
 			<slot />
 		</view>
 		<!-- #ifdef H5 -->
@@ -61,7 +61,7 @@
 			 */
 			width: {
 				type: Number,
-				default: 220
+				default: 500
 			}
 		},
 		data() {
@@ -70,7 +70,7 @@
 				showDrawer: false,
 				rightMode: false,
 				watchTimer: null,
-				drawerWidth: 220
+				drawerWidth: 500
 			}
 		},
 		created() {
@@ -108,7 +108,7 @@
 <style lang="scss" scoped>
 	$uni-mask: rgba($color: #000000, $alpha: 0.4) ;
 	// 抽屉宽度
-	$drawer-width: 220px;
+	$drawer-width: 500rpx;
 
 	.uni-drawer {
 		/* #ifndef APP-NVUE */

@@ -21,7 +21,17 @@
   "libVersion": "3.4.3",
   "appid": "touristappid",
   "projectname": "temp",
-  "condition": {},
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/tabBar/search/search",
+          "pathName": "pages/tabBar/search/search",
+          "query": ""
+        }
+      ]
+    }
+  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

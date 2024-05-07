@@ -1,1 +1,1 @@
-<view> like </view>
+<view><event-card-list wx:if="{{a}}" u-i="10985335-0" bind:__l="__l" u-p="{{a}}"></event-card-list></view>

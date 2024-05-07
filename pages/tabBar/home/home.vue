@@ -29,11 +29,10 @@ export default {
 				success: (res) => {
 					if (res.statusCode === 200) {
 						this.events = res.data.rows
-						// console.log(this.events)
-						// for (let i = 0; i < this.events.length; i++) {
-						// 	this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd)
-						// 	this.events[i].userLike = false //TODO
-						// }
+						console.log(this.events)
+						for (let i = 0; i < this.events.length; i++) {
+							this.events[i].userLike = false //TODO
+						}
 					} else {
 						console.error('Error: Server returned status code:', res.statusCode)
 					}

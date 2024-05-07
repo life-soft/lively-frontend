@@ -96,7 +96,6 @@ export default {
 		eventDataProcess() {
 			for (let i = 0; i < this.events.length; i++) {
 				this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd)
-				this.events[i].userLike = false //TODO
 			}
 		},
 		gotoEventDetail(eventId) {

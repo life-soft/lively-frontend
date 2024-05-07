@@ -23,6 +23,10 @@ const _sfc_main = {
         success: (res) => {
           if (res.statusCode === 200) {
             this.events = res.data.rows;
+            console.log(this.events);
+            for (let i = 0; i < this.events.length; i++) {
+              this.events[i].userLike = false;
+            }
           } else {
             console.error("Error: Server returned status code:", res.statusCode);
           }
