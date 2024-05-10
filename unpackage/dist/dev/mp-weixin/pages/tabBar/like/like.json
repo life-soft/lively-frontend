@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "event-card-list": "../../../components/eventCardList/eventCardList"
+  }
+}
