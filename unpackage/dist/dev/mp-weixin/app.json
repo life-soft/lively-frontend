@@ -6,11 +6,10 @@
     "pages/event/event"
   ],
   "window": {
-    "titleImage": "static/logo.png",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black",
     "backgroundColor": "#ffffff",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#626467",

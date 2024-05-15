@@ -15,8 +15,8 @@
 .header.data-v-b667569c {
   background-color: #ffffff;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0rpx;
+  left: 0rpx;
   width: 100%;
   z-index: 100;
 }
@@ -120,7 +120,7 @@
 .drawer .header .icon.data-v-b667569c {
   width: 50rpx;
   height: 50rpx;
-  padding: 20rpx;
+  padding: 20rpx 30rpx;
 }
 .drawer .header .title.data-v-b667569c {
   font-size: 50rpx;
@@ -129,15 +129,21 @@
   padding: 20rpx;
 }
 .drawer .header .clear.data-v-b667569c {
-  font-size: 30rpx;
+  font-size: 35rpx;
   color: #626467;
   padding: 20rpx;
 }
 .drawer .content.data-v-b667569c {
+  position: relative;
   margin-top: 120rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  overflow-y: auto;
+  display: inline-block;
 }
 .drawer .content .tag-filter.data-v-b667569c {
   width: auto;
+  font-size: 30rpx;
   padding: 10rpx 15rpx;
   border-radius: 100rpx;
   display: inline-flex;
@@ -145,7 +151,15 @@
   align-items: center;
   justify-content: center;
   background-color: #ef756e;
-  color: #ffffff;
+  margin: 10rpx;
+}
+.drawer .content .filter-title.data-v-b667569c {
+  color: #333538;
+  font-size: 40rpx;
+  font-weight: 500;
+  margin-bottom: 15rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
 }
 .drawer .footer.data-v-b667569c {
   background-color: #ffffff;

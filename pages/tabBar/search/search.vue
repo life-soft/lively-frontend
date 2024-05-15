@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="page">
+			
+		</view>
 		<view class="header">
 			<view class="search-box">
 				<image class="icon" src="@/static/icons/search.png"></image>
@@ -18,21 +21,6 @@
 					{{tag}}
 				</view>
 			</view>
-			<uni-drawer class="drawer" ref="showRight" mode="right" width="600">
-				<view class="header">
-					<image class="icon" @click="closeDrawer()" src="@/static/icons/arrow-left.png"></image>
-					<view class="title">筛选</view>
-					<view class="clear" @click="clearAllTags()">清空</view>
-				</view>
-				<view class="content">
-					<view v-for="(tag, index) in AllTags" :key="index" class="tag-filter" @click="deleteTag(index)">
-						{{tag}}
-					</view>
-				</view>
-				<view class="footer">
-					<view class="submit-button" @click="filterSubmit()">确 认</view>
-				</view>
-			</uni-drawer>
 		</view>
 		<view class="results">
 			<!-- <view class="results-count">
@@ -40,7 +28,26 @@
 			</view> -->
 			<event-card-list :events="events" class="events-list"></event-card-list>
 		</view>
-		
+		<uni-drawer class="drawer" ref="showRight" mode="right" width="600">
+			<view class="header">
+				<image class="icon" @click="closeDrawer()" src="@/static/icons/arrow-left.png"></image>
+				<view class="title">筛选</view>
+				<view class="clear" @click="clearAllTags()">清空</view>
+			</view>
+			<view class="content" scroll-y="true">
+				<view class="filter-title">活动分类</view>
+				<view v-for="(tag, index) in AllTags" :key="index" 
+					class="tag-filter" 
+					:style="{color: isTagPicked(tag) ? 'white' : '#333538', backgroundColor: isTagPicked(tag) ? '#ef756e' : '#fff5ee'}" 
+					@click="clickTag(tag)"
+				>
+					{{tag}}
+				</view>
+			</view>
+			<view class="footer">
+				<view class="submit-button" @click="filterSubmit()">确 认</view>
+			</view>
+		</uni-drawer>
 	</view>
 </template>
 
@@ -54,7 +61,7 @@ export default {
 		return {
 			events: [],
 			searchInput: "",
-			tagsPicked: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂"],
+			tagsPicked: ["阿巴巴", "哇嘎嘎", "嘿呦喂"],
 			tagsPickedTemp: [],
 			
 			AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"] // TO BE DELETED
@@ -118,6 +125,14 @@ export default {
 		},
 		clearAllTags() {
 			this.tagsPickedTemp = []
+		},
+		isTagPicked(tag) {
+			console.log(tag)
+			console.log(this.tagsPicked.includes(tag))
+			return this.tagsPicked.includes(tag)
+		},
+		clickTag(tag) {
+			
 		}
 	},
 	onShareAppMessage(res) {
@@ -145,8 +160,8 @@ export default {
 .header {
 	background-color: #ffffff;
 	position: fixed;
-	top: 0;
-	left: 0;
+	top: 0rpx;
+	left: 0rpx;
 	width: 100%;
 	z-index: 100;
 }
@@ -254,7 +269,7 @@ export default {
 		.icon {
 			width: 50rpx;
 			height: 50rpx;
-			padding: 20rpx;
+			padding: 20rpx 30rpx;
 		}
 		.title {
 			font-size: 50rpx;
@@ -263,15 +278,22 @@ export default {
 			padding: 20rpx;
 		}
 		.clear {
-			font-size: 30rpx;
+			font-size: 35rpx;
 			color: $uni-color-info-light;
 			padding: 20rpx;
 		}
 	}
 	.content {
+		position: relative;
 		margin-top: 120rpx;
+		margin-left: 20rpx;
+		margin-right: 20rpx;
+		overflow-y: auto; // TODO: scroll
+		display: inline-block;
+		
 		.tag-filter {
 			width: auto;
+			font-size: 30rpx;
 			padding: 10rpx 15rpx;
 			border-radius: 100rpx;
 			display: inline-flex;
@@ -279,7 +301,15 @@ export default {
 			align-items: center;
 			justify-content: center;
 			background-color: $uni-color-primary;
-			color: #ffffff;
+			margin: 10rpx;
+		}
+		.filter-title {
+			color: $uni-color-info-dark;
+			font-size: 40rpx;
+			font-weight: 500;
+			margin-bottom: 15rpx;
+			margin-left: 10rpx;
+			margin-right: 10rpx;
 		}
 	}
 	.footer {

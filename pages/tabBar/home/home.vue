@@ -1,4 +1,8 @@
 <template>
+	<uni-nav-bar dark :fixed="true" background-color="#ffffff" statusBar="true"
+		title="自定义导航栏" @clickLeft="back" 
+	/>
+	
 	<view>
 		<event-card-list :events="events"></event-card-list>
 	</view>
@@ -65,6 +69,5 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>

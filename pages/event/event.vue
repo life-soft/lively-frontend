@@ -1,4 +1,7 @@
 <template>
+	<uni-nav-bar dark :fixed="true" background-color="#ffffff" statusBar="true"
+		title="自定义导航栏" @clickLeft="back" 
+	/>
 	<view>eventDetail</view>
 </template>
 

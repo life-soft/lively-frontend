@@ -1,1 +1,1 @@
-<view>eventDetail</view>
+<uni-nav-bar wx:if="{{b}}" bindclickLeft="{{a}}" u-i="1e7a267e-0" bind:__l="__l" u-p="{{b}}"/><view>eventDetail</view>

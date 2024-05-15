@@ -10,7 +10,7 @@ const _sfc_main = {
     return {
       events: [],
       searchInput: "",
-      tagsPicked: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂"],
+      tagsPicked: ["阿巴巴", "哇嘎嘎", "嘿呦喂"],
       tagsPickedTemp: [],
       AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"]
       // TO BE DELETED
@@ -73,6 +73,13 @@ const _sfc_main = {
     },
     clearAllTags() {
       this.tagsPickedTemp = [];
+    },
+    isTagPicked(tag) {
+      console.log(tag);
+      console.log(this.tagsPicked.includes(tag));
+      return this.tagsPicked.includes(tag);
+    },
+    clickTag(tag) {
     }
   },
   onShareAppMessage(res) {
@@ -93,9 +100,9 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _easycom_uni_drawer2 = common_vendor.resolveComponent("uni-drawer");
   const _component_event_card_list = common_vendor.resolveComponent("event-card-list");
-  (_easycom_uni_drawer2 + _component_event_card_list)();
+  const _easycom_uni_drawer2 = common_vendor.resolveComponent("uni-drawer");
+  (_component_event_card_list + _easycom_uni_drawer2)();
 }
 const _easycom_uni_drawer = () => "../../../uni_modules/uni-drawer/components/uni-drawer/uni-drawer.js";
 if (!Math) {
@@ -124,24 +131,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.o(($event) => $options.deleteTag(index), index)
       };
     }),
-    n: common_vendor.o(($event) => $options.closeDrawer()),
-    o: common_assets._imports_4,
-    p: common_vendor.o(($event) => $options.clearAllTags()),
-    q: common_vendor.f($data.AllTags, (tag, index, i0) => {
+    n: common_vendor.p({
+      events: $data.events
+    }),
+    o: common_vendor.o(($event) => $options.closeDrawer()),
+    p: common_assets._imports_4,
+    q: common_vendor.o(($event) => $options.clearAllTags()),
+    r: common_vendor.f($data.AllTags, (tag, index, i0) => {
       return {
         a: common_vendor.t(tag),
         b: index,
-        c: common_vendor.o(($event) => $options.deleteTag(index), index)
+        c: $options.isTagPicked(tag) ? "white" : "#333538",
+        d: $options.isTagPicked(tag) ? "#ef756e" : "#fff5ee",
+        e: common_vendor.o(($event) => $options.clickTag(tag), index)
       };
     }),
-    r: common_vendor.o(($event) => $options.filterSubmit()),
-    s: common_vendor.sr("showRight", "b667569c-0"),
-    t: common_vendor.p({
+    s: common_vendor.o(($event) => $options.filterSubmit()),
+    t: common_vendor.sr("showRight", "b667569c-1"),
+    v: common_vendor.p({
       mode: "right",
       width: "600"
-    }),
-    v: common_vendor.p({
-      events: $data.events
     })
   });
 }

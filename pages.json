@@ -2,7 +2,7 @@
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/tabBar/home/home",
-			"style": {
+			"style": {				
 			}
 		},
 		{
@@ -22,11 +22,10 @@
 		}
 	],
 	"globalStyle": {
-		"titleImage": "static/logo.png",
 		"navigationBarBackgroundColor": "#ffffff",
-		"navigationBarTextStyle": "black",
 		"backgroundColor": "#ffffff",
-		"enablePullDownRefresh": true
+		"enablePullDownRefresh": true,
+		"navigationStyle": "custom"
 	},
 	"uniIdRouter": {},
 	"tabBar": {
