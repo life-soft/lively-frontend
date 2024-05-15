@@ -65,15 +65,12 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o(_ctx.back),
-    b: common_vendor.p({
-      dark: true,
+    a: common_vendor.p({
       fixed: true,
       ["background-color"]: "#ffffff",
-      statusBar: "true",
-      title: "自定义导航栏"
+      statusBar: "true"
     }),
-    c: common_vendor.p({
+    b: common_vendor.p({
       events: $data.events
     })
   };

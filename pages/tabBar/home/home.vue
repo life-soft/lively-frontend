@@ -1,7 +1,5 @@
 <template>
-	<uni-nav-bar dark :fixed="true" background-color="#ffffff" statusBar="true"
-		title="自定义导航栏" @clickLeft="back" 
-	/>
+	<uni-nav-bar :fixed="true" background-color="#ffffff" statusBar="true"	/>
 	
 	<view>
 		<event-card-list :events="events"></event-card-list>

@@ -87,7 +87,7 @@
 .uni-navbar--border.data-v-26544265 {
   border-bottom-width: 1rpx;
   border-bottom-style: solid;
-  border-bottom-color: #eee;
+  border-bottom-color: #fff;
 }
 .uni-ellipsis-1.data-v-26544265 {
   overflow: hidden;
@@ -96,6 +96,6 @@
 }
 .uni-nav-bar-image.data-v-26544265 {
   position: absolute;
-  width: 100px;
-  height: 40px;
+  width: 90px;
+  height: 36px;
 }

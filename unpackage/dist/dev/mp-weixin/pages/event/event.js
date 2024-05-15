@@ -10,6 +10,14 @@ const _sfc_main = {
     this.eventId = e.id;
     console.log("id", id);
   },
+  methods: {
+    back() {
+      console.log("back");
+      common_vendor.index.navigateBack({
+        delta: 1
+      });
+    }
+  },
   onShareAppMessage() {
   },
   onShareTimeline() {
@@ -25,13 +33,13 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o(_ctx.back),
+    a: common_vendor.o($options.back),
     b: common_vendor.p({
-      dark: true,
       fixed: true,
       ["background-color"]: "#ffffff",
       statusBar: "true",
-      title: "自定义导航栏"
+      color: "#333538",
+      ["left-icon"]: "left"
     })
   };
 }

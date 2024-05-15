@@ -1,7 +1,7 @@
 <template>
 	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
 		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
-			:style="{ 'background-color': themeBgColor, 'border-bottom-color':themeColor }" >
+			:style="{ 'background-color': themeBgColor }" >
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
 				class="uni-navbar__header">
@@ -19,10 +19,10 @@
 				</view>
 				<view class="uni-navbar__header-container " @tap="onClickTitle">
 					<slot>
-						<view class="uni-navbar__header-container-inner" v-if="title.length>0">
-							<text class="uni-nav-bar-text uni-ellipsis-1"
-								:style="{color: themeColor }">{{ title }}</text>
-							<image class="uni-nav-bar-image" v-if="titleImage" src="http://101.35.43.117:9000/oss/db5429a9-cb6e-43c3-9bd5-007960ad34de.png"></image>
+						<view class="uni-navbar__header-container-inner" v-if="titleImage">
+						<!-- 	<text class="uni-nav-bar-text uni-ellipsis-1"
+								:style="{color: themeColor }">{{ title }}</text> -->
+							<image class="uni-nav-bar-image" src="http://101.35.43.117:9000/oss/db5429a9-cb6e-43c3-9bd5-007960ad34de.png"></image>
 						</view>
 					</slot>
 				</view>
@@ -59,7 +59,7 @@
 	 * @description 导航栏组件，主要用于头部导航
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=52
 	 * @property {Boolean} dark 开启黑暗模式
-	 * @property {String} title 标题文字
+	 // * @property {String} title 标题文字
 	 * @property {String} titleImage 标题图片
 	 * @property {String} leftText 左侧按钮文本
 	 * @property {String} rightText 右侧按钮文本
@@ -86,10 +86,10 @@
 				type: Boolean,
 				default: false
 			},
-			title: {
-				type: String,
-				default: ""
-			},
+			// title: {
+			// 	type: String,
+			// 	default: ""
+			// },
 			titleImage: {
 				type: Boolean,
 				default: true
@@ -343,7 +343,7 @@
 	.uni-navbar--border {
 		border-bottom-width: 1rpx;
 		border-bottom-style: solid;
-		border-bottom-color: #eee;
+		border-bottom-color: #fff;
 	}
 
 	.uni-ellipsis-1 {
@@ -360,8 +360,8 @@
 
 	.uni-nav-bar-image {
 		position: absolute;
-		width: 100px;
-		height: 40px;
+		width: 90px;
+		height: 36px;
 	}
 
 	// 暗主题配置

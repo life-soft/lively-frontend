@@ -1,6 +1,6 @@
 <template>
-	<uni-nav-bar dark :fixed="true" background-color="#ffffff" statusBar="true"
-		title="自定义导航栏" @clickLeft="back" 
+	<uni-nav-bar :fixed="true" background-color="#ffffff" statusBar="true"
+		color="#333538" left-icon="left" @clickLeft="back" 
 	/>
 	<view>eventDetail</view>
 </template>
@@ -15,6 +15,15 @@ export default {
 	onLoad(e) { // 类型非必填，可自动推导
 		this.eventId = e.id;
 		console.log("id", id)
+	},
+	methods: {
+		back() {
+			console.log("back")
+			uni.navigateBack({
+				delta: 1
+			})
+		},
+
 	},
 	onShareAppMessage() {
 		
