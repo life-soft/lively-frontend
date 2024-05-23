@@ -34,6 +34,11 @@ const _sfc_main = {
       default: 500
     }
   },
+  computed: {
+    topBarHeight() {
+      return common_vendor.index.getSystemInfoSync().statusBarHeight + 44 + "px";
+    }
+  },
   data() {
     return {
       visibleSync: false,
@@ -83,7 +88,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     f: $data.showDrawer ? 1 : "",
     g: $data.drawerWidth + "rpx",
     h: $data.showDrawer ? 1 : "",
-    i: common_vendor.o((...args) => $options.clear && $options.clear(...args))
+    i: common_vendor.o((...args) => $options.clear && $options.clear(...args)),
+    j: $options.topBarHeight
   } : {});
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-f7c32d22"], ["__file", "/Users/luyihan/Documents/Projects/lively-frontend/uni_modules/uni-drawer/components/uni-drawer/uni-drawer.vue"]]);

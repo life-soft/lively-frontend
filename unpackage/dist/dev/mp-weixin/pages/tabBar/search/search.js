@@ -10,7 +10,8 @@ const _sfc_main = {
     return {
       events: [],
       searchInput: "",
-      tagsPicked: ["阿巴巴", "哇嘎嘎", "嘿呦喂"],
+      tagsPicked: ["阿巴巴"],
+      // 还是用boolean表？
       tagsPickedTemp: [],
       AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"]
       // TO BE DELETED
@@ -22,11 +23,13 @@ const _sfc_main = {
     },
     eventsCount() {
       return this.events.length;
+    },
+    topBarHeight() {
+      return common_vendor.index.getSystemInfoSync().statusBarHeight + 44 + "px";
     }
   },
   mounted() {
     this.getEvents();
-    this.showDrawer();
   },
   methods: {
     getEvents() {
@@ -37,7 +40,6 @@ const _sfc_main = {
         success: (res) => {
           if (res.statusCode === 200) {
             this.events = res.data.rows;
-            console.log(this.events);
             for (let i = 0; i < this.events.length; i++) {
               this.events[i].userLike = false;
             }
@@ -59,15 +61,15 @@ const _sfc_main = {
     deleteTag(index) {
       this.tagsPicked.splice(index, 1);
     },
+    // TODO 选择标签功能做得特别差，待改进
     showDrawer() {
-      this.tagsPickedTemp = this.tagsPicked;
+      this.tagsPickedTemp = this.tagsPicked.slice();
       this.$refs.showRight.open();
     },
     closeDrawer() {
       this.$refs.showRight.close();
     },
     filterSubmit() {
-      console.log("filter submit and search again");
       this.tagsPicked = this.tagsPickedTemp.slice();
       this.$refs.showRight.close();
     },
@@ -75,11 +77,17 @@ const _sfc_main = {
       this.tagsPickedTemp = [];
     },
     isTagPicked(tag) {
-      console.log(tag);
-      console.log(this.tagsPicked.includes(tag));
-      return this.tagsPicked.includes(tag);
+      return this.tagsPickedTemp.includes(tag);
     },
     clickTag(tag) {
+      let index = 0;
+      index = this.tagsPickedTemp.indexOf(tag);
+      console.log(index);
+      if (index > -1) {
+        this.tagsPickedTemp.splice(index, 1);
+      } else {
+        this.tagsPickedTemp.push(tag);
+      }
     }
   },
   onShareAppMessage(res) {
@@ -100,44 +108,52 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
   const _component_event_card_list = common_vendor.resolveComponent("event-card-list");
   const _easycom_uni_drawer2 = common_vendor.resolveComponent("uni-drawer");
-  (_component_event_card_list + _easycom_uni_drawer2)();
+  (_easycom_uni_nav_bar2 + _component_event_card_list + _easycom_uni_drawer2)();
 }
+const _easycom_uni_nav_bar = () => "../../../uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.js";
 const _easycom_uni_drawer = () => "../../../uni_modules/uni-drawer/components/uni-drawer/uni-drawer.js";
 if (!Math) {
-  _easycom_uni_drawer();
+  (_easycom_uni_nav_bar + _easycom_uni_drawer)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
-    a: common_assets._imports_0,
-    b: common_vendor.o(($event) => $options.search()),
-    c: $data.searchInput,
-    d: common_vendor.o(($event) => $data.searchInput = $event.detail.value),
-    e: common_vendor.o(($event) => $options.cleanSearchBar()),
-    f: common_assets._imports_1,
-    g: common_vendor.o(($event) => $options.search()),
-    h: common_assets._imports_2,
-    i: $options.tagsPickedCount > 0
+    a: common_vendor.p({
+      fixed: true,
+      ["background-color"]: "#ffffff",
+      statusBar: "true"
+    }),
+    b: common_assets._imports_0,
+    c: common_vendor.o(($event) => $options.search()),
+    d: $data.searchInput,
+    e: common_vendor.o(($event) => $data.searchInput = $event.detail.value),
+    f: common_vendor.o(($event) => $options.cleanSearchBar()),
+    g: common_assets._imports_1,
+    h: common_vendor.o(($event) => $options.search()),
+    i: common_assets._imports_2,
+    j: $options.tagsPickedCount > 0
   }, $options.tagsPickedCount > 0 ? {
-    j: common_vendor.t($options.tagsPickedCount)
+    k: common_vendor.t($options.tagsPickedCount)
   } : {}, {
-    k: common_assets._imports_3,
-    l: common_vendor.o((...args) => $options.showDrawer && $options.showDrawer(...args)),
-    m: common_vendor.f($data.tagsPicked, (tag, index, i0) => {
+    l: common_assets._imports_3,
+    m: common_vendor.o((...args) => $options.showDrawer && $options.showDrawer(...args)),
+    n: common_vendor.f($data.tagsPicked, (tag, index, i0) => {
       return {
         a: common_vendor.t(tag),
         b: index,
         c: common_vendor.o(($event) => $options.deleteTag(index), index)
       };
     }),
-    n: common_vendor.p({
+    o: $options.topBarHeight,
+    p: common_vendor.p({
       events: $data.events
     }),
-    o: common_vendor.o(($event) => $options.closeDrawer()),
-    p: common_assets._imports_4,
-    q: common_vendor.o(($event) => $options.clearAllTags()),
-    r: common_vendor.f($data.AllTags, (tag, index, i0) => {
+    q: common_vendor.o(($event) => $options.closeDrawer()),
+    r: common_assets._imports_4,
+    s: common_vendor.o(($event) => $options.clearAllTags()),
+    t: common_vendor.f($data.AllTags, (tag, index, i0) => {
       return {
         a: common_vendor.t(tag),
         b: index,
@@ -146,11 +162,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: common_vendor.o(($event) => $options.clickTag(tag), index)
       };
     }),
-    s: common_vendor.o(($event) => $options.filterSubmit()),
-    t: common_vendor.sr("showRight", "b667569c-1"),
-    v: common_vendor.p({
+    v: common_vendor.o(($event) => $options.filterSubmit()),
+    w: common_vendor.sr("showRight", "b667569c-2"),
+    x: common_vendor.p({
+      maskClick: false,
       mode: "right",
-      width: "600"
+      width: "750"
     })
   });
 }

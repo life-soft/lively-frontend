@@ -24,6 +24,7 @@
 	"globalStyle": {
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#ffffff",
+		"navigationBarTextStyle": "black",
 		"enablePullDownRefresh": true,
 		"navigationStyle": "custom"
 	},

@@ -1,5 +1,5 @@
 <template>
-	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer" @touchmove.stop.prevent="clear">
+	<view v-if="visibleSync" :class="{ 'uni-drawer--visible': showDrawer }" class="uni-drawer" @touchmove.stop.prevent="clear" :style="{top: topBarHeight}">
 		<view class="uni-drawer__mask" :class="{ 'uni-drawer__mask--visible': showDrawer && mask }" @tap="close('mask')" />
 		<view class="uni-drawer__content" :class="{'uni-drawer--right': rightMode,'uni-drawer--left': !rightMode, 'uni-drawer__content--visible': showDrawer}" :style="{width:drawerWidth+'rpx'}">
 			<slot />
@@ -62,6 +62,11 @@
 			width: {
 				type: Number,
 				default: 500
+			}
+		},
+		computed: {
+			topBarHeight() {
+				return (uni.getSystemInfoSync().statusBarHeight + 44) + 'px' // 导航栏高度44px
 			}
 		},
 		data() {

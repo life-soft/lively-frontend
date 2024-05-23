@@ -1,54 +1,50 @@
 <template>
-	<view>
-		<view class="page">
-			
+	<uni-nav-bar :fixed="true" background-color="#ffffff" statusBar="true"	/>
+	<view class="header" :style="{top: topBarHeight}">
+		<view class="search-box">
+			<image class="icon" src="@/static/icons/search.png"></image>
+			<input class="input" v-model="searchInput" @confirm="search()" confirm-type="search" placeholder="请输入关键词" />
+			<image class="icon" @click="cleanSearchBar()" src="@/static/icons/cancel.png"></image>
+			<text class="search-button" @click="search()">搜索</text>
 		</view>
-		<view class="header">
-			<view class="search-box">
-				<image class="icon" src="@/static/icons/search.png"></image>
-				<input class="input" v-model="searchInput" @confirm="search()" confirm-type="search" placeholder="请输入关键词" />
-				<image class="icon" @click="cleanSearchBar()" src="@/static/icons/cancel.png"></image>
-				<text class="search-button" @click="search()">搜索</text>
+		<view class="filters">
+			<view class="tag-filter" @click="showDrawer">
+				<image class="icon" src="@/static/icons/filter-light.png"></image>
+				<view v-if="tagsPickedCount > 0" style="margin-right: 4rpx;">{{tagsPickedCount}}</view>
+				<view>筛选</view>
+				<image class="icon" src="@/static/icons/chevron-down-light.png"></image>
 			</view>
-			<view class="filters">
-				<view class="tag-filter" @click="showDrawer">
-					<image class="icon" src="@/static/icons/filter-light.png"></image>
-					<view v-if="tagsPickedCount > 0" style="margin-right: 4rpx;">{{tagsPickedCount}}</view>
-					<view>筛选</view>
-					<image class="icon" src="@/static/icons/chevron-down-light.png"></image>
-				</view>
-				<view v-for="(tag, index) in tagsPicked" :key="index" class="tag-filter" @click="deleteTag(index)">
-					{{tag}}
-				</view>
+			<view v-for="(tag, index) in tagsPicked" :key="index" class="tag-filter" @click="deleteTag(index)">
+				{{tag}}
 			</view>
 		</view>
-		<view class="results">
-			<!-- <view class="results-count">
-				{{eventsCount}}条结果
-			</view> -->
-			<event-card-list :events="events" class="events-list"></event-card-list>
-		</view>
-		<uni-drawer class="drawer" ref="showRight" mode="right" width="600">
-			<view class="header">
-				<image class="icon" @click="closeDrawer()" src="@/static/icons/arrow-left.png"></image>
-				<view class="title">筛选</view>
-				<view class="clear" @click="clearAllTags()">清空</view>
-			</view>
-			<view class="content" scroll-y="true">
-				<view class="filter-title">活动分类</view>
-				<view v-for="(tag, index) in AllTags" :key="index" 
-					class="tag-filter" 
-					:style="{color: isTagPicked(tag) ? 'white' : '#333538', backgroundColor: isTagPicked(tag) ? '#ef756e' : '#fff5ee'}" 
-					@click="clickTag(tag)"
-				>
-					{{tag}}
-				</view>
-			</view>
-			<view class="footer">
-				<view class="submit-button" @click="filterSubmit()">确 认</view>
-			</view>
-		</uni-drawer>
 	</view>
+	<view class="results">
+		<!-- <view class="results-count">
+			{{eventsCount}}条结果
+		</view> -->
+		<event-card-list :events="events" class="events-list"></event-card-list>
+	</view>
+	<uni-drawer class="drawer" :maskClick="false" ref="showRight" mode="right" width="750">
+		<view class="header">
+			<image class="icon" @click="closeDrawer()" src="@/static/icons/arrow-left.png"></image>
+			<view class="title">筛选</view>
+			<view class="clear" @click="clearAllTags()">清空</view>
+		</view>
+		<view class="content" scroll-y="true">
+			<view class="filter-title">活动分类</view>
+			<view v-for="(tag, index) in AllTags" :key="index" 
+				class="tag-filter" 
+				:style="{color: isTagPicked(tag) ? 'white' : '#333538', backgroundColor: isTagPicked(tag) ? '#ef756e' : '#fff5ee'}" 
+				@click="clickTag(tag)"
+			>
+				{{tag}}
+			</view>
+		</view>
+		<view class="footer">
+			<view class="submit-button" @click="filterSubmit()">确 认</view>
+		</view>
+	</uni-drawer>
 </template>
 
 <script>
@@ -61,7 +57,7 @@ export default {
 		return {
 			events: [],
 			searchInput: "",
-			tagsPicked: ["阿巴巴", "哇嘎嘎", "嘿呦喂"],
+			tagsPicked: ["阿巴巴"], // 还是用boolean表？
 			tagsPickedTemp: [],
 			
 			AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"] // TO BE DELETED
@@ -73,12 +69,13 @@ export default {
 		},
 		eventsCount() {
 			return this.events.length
+		},
+		topBarHeight() {
+			return (uni.getSystemInfoSync().statusBarHeight + 44) + 'px' // 导航栏高度44px
 		}
-		
 	},
 	mounted() {
 		this.getEvents()
-		this.showDrawer() // TO BE DELETED
 	},
 	methods: {
 		getEvents() {
@@ -89,7 +86,6 @@ export default {
 				success: (res) => {
 					if (res.statusCode === 200) {
 						this.events = res.data.rows
-						console.log(this.events)
 						for (let i = 0; i < this.events.length; i++) {
 							this.events[i].userLike = false //TODO
 						}
@@ -110,29 +106,37 @@ export default {
 		},
 		deleteTag(index) {
 			this.tagsPicked.splice(index, 1)
+			// TODO: search again
 		},
+		
+		// TODO 选择标签功能做得特别差，待改进
 		showDrawer() {
-			this.tagsPickedTemp = this.tagsPicked //??? not sure
+			this.tagsPickedTemp = this.tagsPicked.slice()
 			this.$refs.showRight.open()
 		},
 		closeDrawer() {
 			this.$refs.showRight.close()
 		},
 		filterSubmit() {
-			console.log("filter submit and search again")
-			this.tagsPicked = this.tagsPickedTemp.slice() // ??? not sure
+			this.tagsPicked = this.tagsPickedTemp.slice() 
 			this.$refs.showRight.close()
+			// TODO: search again
 		},
 		clearAllTags() {
 			this.tagsPickedTemp = []
 		},
 		isTagPicked(tag) {
-			console.log(tag)
-			console.log(this.tagsPicked.includes(tag))
-			return this.tagsPicked.includes(tag)
+			return this.tagsPickedTemp.includes(tag)
 		},
 		clickTag(tag) {
-			
+			let index = 0;
+			index = this.tagsPickedTemp.indexOf(tag)
+			console.log(index)
+			if (index > -1) {
+				this.tagsPickedTemp.splice(index, 1)
+			} else {
+				this.tagsPickedTemp.push(tag)
+			}
 		}
 	},
 	onShareAppMessage(res) {
@@ -160,7 +164,6 @@ export default {
 .header {
 	background-color: #ffffff;
 	position: fixed;
-	top: 0rpx;
 	left: 0rpx;
 	width: 100%;
 	z-index: 100;
@@ -319,7 +322,7 @@ export default {
 		left: 0;
 		width: 100%;
 		z-index: 100;
-		height: 100rpx;
+		height: 150rpx;
 		width: 100%;
 		display: flex;
 		align-items: center;
