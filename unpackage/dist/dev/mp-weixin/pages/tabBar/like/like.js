@@ -2,6 +2,21 @@
 const common_vendor = require("../../../common/vendor.js");
 const eventCardList = () => "../../../components/eventCardList/eventCardList.js";
 const _sfc_main = {
+  onShow() {
+    let openid = common_vendor.index.getStorageSync("openid");
+    console.log("openid when entering like", openid);
+    if (openid.length == 0) {
+      console.log("not login");
+      common_vendor.index.navigateTo({
+        url: "/pages/login/wxLogin"
+      });
+      return;
+    }
+    this.getEvents();
+  },
+  mounted() {
+    this.getEvents();
+  },
   components: {
     eventCardList
   },
@@ -11,9 +26,6 @@ const _sfc_main = {
     };
   },
   computed: {},
-  mounted() {
-    this.getEvents();
-  },
   methods: {
     getEvents() {
       const apiUrl = "http://124.222.92.30:8080/system/event/list";

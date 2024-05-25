@@ -14,6 +14,9 @@ const _sfc_main = {
   mounted() {
     this.getEvents();
   },
+  onShow() {
+    this.getEvents();
+  },
   methods: {
     getEvents() {
       const apiUrl = "http://124.222.92.30:8080/system/event/list";

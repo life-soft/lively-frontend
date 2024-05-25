@@ -28,6 +28,9 @@ const _sfc_main = {
       return common_vendor.index.getSystemInfoSync().statusBarHeight + 44 + "px";
     }
   },
+  onShow() {
+    this.getEvents();
+  },
   mounted() {
     this.getEvents();
   },

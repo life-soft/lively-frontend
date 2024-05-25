@@ -7,6 +7,13 @@ const _sfc_main = {
   },
   methods: {
     back() {
+      if (getCurrentPages()[0].route == "pages/tabBar/like/like") {
+        console.log("go home");
+        common_vendor.index.switchTab({
+          url: "/pages/tabBar/home/home"
+        });
+        return;
+      }
       common_vendor.index.navigateBack({
         delta: 1
       });

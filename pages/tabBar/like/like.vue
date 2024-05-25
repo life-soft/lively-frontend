@@ -8,6 +8,21 @@
 <script>
 import eventCardList from "@/components/eventCardList/eventCardList.vue"
 export default {
+	onShow() {
+		let openid = uni.getStorageSync("openid")
+		console.log("openid when entering like", openid)
+		if (openid.length == 0) {
+			console.log("not login")
+			uni.navigateTo({
+				url: '/pages/login/wxLogin'
+			})
+			return
+		}
+		this.getEvents();	
+	},	
+	mounted() {
+		this.getEvents();
+	},
 	components: {
 		eventCardList
 	},
@@ -18,9 +33,7 @@ export default {
 	},
 	computed: {
 	},
-	mounted() {
-		this.getEvents();
-	},
+
 	methods: {
 		getEvents() {
 			const apiUrl = 'http://124.222.92.30:8080/system/event/list';

@@ -74,6 +74,9 @@ export default {
 			return (uni.getSystemInfoSync().statusBarHeight + 44) + 'px' // 导航栏高度44px
 		}
 	},
+	onShow() {
+		this.getEvents();	
+	},
 	mounted() {
 		this.getEvents()
 	},

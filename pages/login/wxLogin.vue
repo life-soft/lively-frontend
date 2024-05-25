@@ -21,7 +21,14 @@ export default {
 		}
 	},
 	methods: {
-		back() {
+		back() { //TODO: 导航守卫 目前用最笨的方法
+			if (getCurrentPages()[0].route == "pages/tabBar/like/like") {
+				console.log("go home")
+				uni.switchTab({
+					url: '/pages/tabBar/home/home'
+				})
+				return
+			}
 			uni.navigateBack({
 				delta: 1
 			})
