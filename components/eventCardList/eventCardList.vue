@@ -38,7 +38,6 @@ export default {
 	},
 	watch: {
 		events(oldVal, newVal) {
-			console.log("events in component:", this.events)
 			this.eventDataProcess()
 		}
 	},
@@ -107,7 +106,19 @@ export default {
 		},
 		likeOrDislikeEvent(index) {
 			console.log("like or dislike event", this.events[index])
-			this.events[index].userLike = this.events[index].userLike == false ? true : false
+			// 登录后才可使用按钮，有更好的实现方式？
+			let openid = uni.getStorageSync("openid")
+			console.log("openid: ",openid)
+			if (openid.length == 0) {
+				console.log("not login")
+				uni.navigateTo({
+					url: '/pages/login/wxLogin'
+				})
+				return
+			} else {
+				this.events[index].userLike = this.events[index].userLike == false ? true : false
+				
+			}
 		},
 	},
 }

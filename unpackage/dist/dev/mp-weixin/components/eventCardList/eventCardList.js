@@ -8,7 +8,6 @@ const _sfc_main = {
   },
   watch: {
     events(oldVal, newVal) {
-      console.log("events in component:", this.events);
       this.eventDataProcess();
     }
   },
@@ -69,7 +68,17 @@ const _sfc_main = {
     },
     likeOrDislikeEvent(index) {
       console.log("like or dislike event", this.events[index]);
-      this.events[index].userLike = this.events[index].userLike == false ? true : false;
+      let openid = common_vendor.index.getStorageSync("openid");
+      console.log("openid: ", openid);
+      if (openid.length == 0) {
+        console.log("not login");
+        common_vendor.index.navigateTo({
+          url: "/pages/login/wxLogin"
+        });
+        return;
+      } else {
+        this.events[index].userLike = this.events[index].userLike == false ? true : false;
+      }
     }
   }
 };
@@ -95,8 +104,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         l: index
       });
     }),
-    b: common_assets._imports_0$1,
-    c: common_assets._imports_1$1,
+    b: common_assets._imports_0$2,
+    c: common_assets._imports_1$2,
     d: common_assets._imports_2$1
   };
 }

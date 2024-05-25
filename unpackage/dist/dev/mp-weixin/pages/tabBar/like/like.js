@@ -55,12 +55,22 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
   const _component_event_card_list = common_vendor.resolveComponent("event-card-list");
-  _component_event_card_list();
+  (_easycom_uni_nav_bar2 + _component_event_card_list)();
+}
+const _easycom_uni_nav_bar = () => "../../../uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.js";
+if (!Math) {
+  _easycom_uni_nav_bar();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.p({
+      fixed: true,
+      ["background-color"]: "#ffffff",
+      statusBar: "true"
+    }),
+    b: common_vendor.p({
       events: $data.events
     })
   };

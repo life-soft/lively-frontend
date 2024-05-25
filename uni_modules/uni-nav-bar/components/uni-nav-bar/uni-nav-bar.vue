@@ -19,10 +19,10 @@
 				</view>
 				<view class="uni-navbar__header-container " @tap="onClickTitle">
 					<slot>
-						<view class="uni-navbar__header-container-inner" v-if="titleImage">
-						<!-- 	<text class="uni-nav-bar-text uni-ellipsis-1"
-								:style="{color: themeColor }">{{ title }}</text> -->
-							<image class="uni-nav-bar-image" src="http://101.35.43.117:9000/oss/db5429a9-cb6e-43c3-9bd5-007960ad34de.png"></image>
+						<view class="uni-navbar__header-container-inner">
+							<text v-if="title.length > 0" class="uni-nav-bar-text uni-ellipsis-1"
+								:style="{color: themeColor }">{{ title }}</text>
+							<image v-if="titleImage" class="uni-nav-bar-image" src="http://101.35.43.117:9000/oss/db5429a9-cb6e-43c3-9bd5-007960ad34de.png"></image>
 						</view>
 					</slot>
 				</view>
@@ -86,10 +86,10 @@
 				type: Boolean,
 				default: false
 			},
-			// title: {
-			// 	type: String,
-			// 	default: ""
-			// },
+			title: {
+				type: String,
+				default: ""
+			},
 			titleImage: {
 				type: Boolean,
 				default: true
@@ -222,10 +222,11 @@
 		/* #ifndef APP-PLUS */
 		font-size: 14px;
 		/* #endif */
+		font-size: 20px;
 	}
 
 	.uni-nav-bar-right-text {
-		font-size: 12px;
+		font-size: 20px;
 	}
 
 	.uni-navbar__content {
@@ -256,7 +257,7 @@
 		padding: 0 10px;
 		flex-direction: row;
 		height: $nav-height;
-		font-size: 12px;
+		font-size: 20px;
 	}
 
 	.uni-navbar__header-btns {
@@ -312,7 +313,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		font-size: 12px;
+		font-size: 20px;
 		overflow: hidden;
 		// box-sizing: border-box;
 	}

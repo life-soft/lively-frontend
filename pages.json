@@ -19,6 +19,11 @@
 			"path": "pages/event/event",
 			"style": {
 			}
+		},
+		{
+			"path": "pages/login/wxLogin",
+			"style": {
+			}
 		}
 	],
 	"globalStyle": {

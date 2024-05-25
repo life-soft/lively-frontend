@@ -1,0 +1,1 @@
+<uni-nav-bar wx:if="{{b}}" bindclickLeft="{{a}}" u-i="27c83d3b-0" bind:__l="__l" u-p="{{b}}"/><view class="page"><view class="logo"><image class="pic" src="{{c}}"></image></view><button class="wxLoginBtn" bindtap="{{e}}"><image class="wechatLogo" src="{{d}}"></image><text class="loginText">微信授权登录</text></button></view>

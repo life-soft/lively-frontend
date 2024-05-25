@@ -3,7 +3,8 @@
     "pages/tabBar/home/home",
     "pages/tabBar/like/like",
     "pages/tabBar/search/search",
-    "pages/event/event"
+    "pages/event/event",
+    "pages/login/wxLogin"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

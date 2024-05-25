@@ -1,4 +1,5 @@
 <template>
+	<uni-nav-bar :fixed="true" background-color="#ffffff" statusBar="true"	/>
 	<view>
 		<event-card-list :events="events"></event-card-list>
 	</view>

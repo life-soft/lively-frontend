@@ -13,10 +13,10 @@ const _sfc_main = {
       type: Boolean,
       default: false
     },
-    // title: {
-    // 	type: String,
-    // 	default: ""
-    // },
+    title: {
+      type: String,
+      default: ""
+    },
     titleImage: {
       type: Boolean,
       default: true
@@ -155,39 +155,44 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   } : {}, {
     h: common_vendor.o((...args) => $options.onClickLeft && $options.onClickLeft(...args)),
     i: $options.leftIconWidth,
-    j: $props.titleImage
+    j: $props.title.length > 0
+  }, $props.title.length > 0 ? {
+    k: common_vendor.t($props.title),
+    l: $options.themeColor
+  } : {}, {
+    m: $props.titleImage
   }, $props.titleImage ? {} : {}, {
-    k: common_vendor.o((...args) => $options.onClickTitle && $options.onClickTitle(...args)),
-    l: $props.rightIcon.length
+    n: common_vendor.o((...args) => $options.onClickTitle && $options.onClickTitle(...args)),
+    o: $props.rightIcon.length
   }, $props.rightIcon.length ? {
-    m: common_vendor.p({
+    p: common_vendor.p({
       color: $options.themeColor,
       type: $props.rightIcon,
       size: "22"
     })
   } : {}, {
-    n: $props.rightText.length && !$props.rightIcon.length
+    q: $props.rightText.length && !$props.rightIcon.length
   }, $props.rightText.length && !$props.rightIcon.length ? {
-    o: common_vendor.t($props.rightText),
-    p: $options.themeColor
+    r: common_vendor.t($props.rightText),
+    s: $options.themeColor
   } : {}, {
-    q: common_vendor.o((...args) => $options.onClickRight && $options.onClickRight(...args)),
-    r: $options.rightIconWidth,
-    s: $options.themeColor,
-    t: $options.themeBgColor,
-    v: $options.navbarHeight,
-    w: $props.fixed ? 1 : "",
-    x: $props.shadow ? 1 : "",
-    y: $props.border ? 1 : "",
-    z: $options.themeBgColor,
-    A: $props.fixed
+    t: common_vendor.o((...args) => $options.onClickRight && $options.onClickRight(...args)),
+    v: $options.rightIconWidth,
+    w: $options.themeColor,
+    x: $options.themeBgColor,
+    y: $options.navbarHeight,
+    z: $props.fixed ? 1 : "",
+    A: $props.shadow ? 1 : "",
+    B: $props.border ? 1 : "",
+    C: $options.themeBgColor,
+    D: $props.fixed
   }, $props.fixed ? common_vendor.e({
-    B: $props.statusBar
+    E: $props.statusBar
   }, $props.statusBar ? {} : {}, {
-    C: $options.navbarHeight
+    F: $options.navbarHeight
   }) : {}, {
-    D: $props.dark ? 1 : "",
-    E: $props.fixed ? 1 : ""
+    G: $props.dark ? 1 : "",
+    H: $props.fixed ? 1 : ""
   });
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-26544265"], ["__file", "/Users/luyihan/Documents/Projects/lively-frontend/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue"]]);
