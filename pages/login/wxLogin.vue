@@ -46,6 +46,7 @@ export default {
 								code: loginRes.code,
 							},
 							success(res) {
+								console.log(res)
 								if (res.data.code !== 200) {
 									reject(new Error('获取openid失败：', res.data.msg))
 									return

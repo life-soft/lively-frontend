@@ -22,22 +22,27 @@ export default {
 	mounted() {
 		this.getEvents();
 	},
+	onPullDownRefresh() {
+		this.getEvents();	
+	},
 	onShow() {
 		this.getEvents();	
 	},
 	methods: {
 		getEvents() {
 			const apiUrl = 'http://124.222.92.30:8080/system/event/list';
+			console.log("open",uni.getStorageSync("openid"))
 			uni.request({
 				url: apiUrl,
-				method: 'GET', 
+				method: 'POST', 
+				// header: { 'content-type': 'application/x-www-form-urlencoded', },
+				data: {
+					"openID": uni.getStorageSync("openid")
+				},
 				success: (res) => {
+					console.log("events", res)
 					if (res.statusCode === 200) {
 						this.events = res.data.rows
-						console.log(this.events)
-						for (let i = 0; i < this.events.length; i++) {
-							this.events[i].userLike = false //TODO
-						}
 					} else {
 						console.error('Error: Server returned status code:', res.statusCode)
 					}

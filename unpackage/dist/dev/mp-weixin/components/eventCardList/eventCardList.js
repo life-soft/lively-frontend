@@ -55,6 +55,9 @@ const _sfc_main = {
       return `${formattedDate} · ${formattedStartTime}-${formattedEndTime}`;
     },
     eventDataProcess() {
+      if (this.events.length == 0) {
+        return;
+      }
       for (let i = 0; i < this.events.length; i++) {
         this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd);
       }
@@ -77,7 +80,27 @@ const _sfc_main = {
         });
         return;
       } else {
-        this.events[index].userLike = this.events[index].userLike == false ? true : false;
+        const apiUrl = "http://124.222.92.30:8080/system/event/collect";
+        common_vendor.index.request({
+          url: apiUrl,
+          method: "POST",
+          // header: { 'content-type': 'application/x-www-form-urlencoded', },
+          data: {
+            "openID": common_vendor.index.getStorageSync("openid"),
+            "eventID": this.events[index].eventId
+          },
+          success: (res) => {
+            console.log(res);
+            if (res.statusCode === 200) {
+              this.events[index].isCollected = this.events[index].isCollected == 0 ? 1 : 0;
+            } else {
+              console.error("Error: Server returned status code:", res.statusCode);
+            }
+          },
+          fail: (error) => {
+            console.error("Error fetching activities:", error);
+          }
+        });
       }
     }
   }
@@ -93,8 +116,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: event,
         f: common_vendor.o(() => {
         }, index),
-        g: event.userLike
-      }, event.userLike ? {
+        g: event.isCollected == 1
+      }, event.isCollected == 1 ? {
         h: common_assets._imports_3$1
       } : {
         i: common_assets._imports_4$1
@@ -104,7 +127,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         l: index
       });
     }),
-    b: common_assets._imports_0$2,
+    b: common_assets._imports_0$3,
     c: common_assets._imports_1$2,
     d: common_assets._imports_2$1
   };

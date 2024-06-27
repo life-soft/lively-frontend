@@ -21,7 +21,7 @@
 					<image class="action-img" src="@/static/icons/share.png"></image>
 				</button>
 				<button class="action-button" hover-class="is-hover" @click.stop="likeOrDislikeEvent(index)">
-					<image v-if="event.userLike" class="action-img" src="@/static/icons/like-filled.png"></image>
+					<image v-if="event.isCollected == 1" class="action-img" src="@/static/icons/like-filled.png"></image>
 					<image v-else class="action-img" src="@/static/icons/like.png"></image>
 				</button>
 			</view>
@@ -93,6 +93,9 @@ export default {
 			return `${formattedDate} · ${formattedStartTime}-${formattedEndTime}`
 		},
 		eventDataProcess() {
+			if (this.events.length == 0) {
+				return
+			}
 			for (let i = 0; i < this.events.length; i++) {
 				this.events[i].eventTime = this.formatDatetime(this.events[i].eventStart, this.events[i].eventEnd)
 			}
@@ -116,8 +119,27 @@ export default {
 				})
 				return
 			} else {
-				this.events[index].userLike = this.events[index].userLike == false ? true : false
-				
+				const apiUrl = 'http://124.222.92.30:8080/system/event/collect';
+				uni.request({
+					url: apiUrl,
+					method: 'POST', 
+					// header: { 'content-type': 'application/x-www-form-urlencoded', },
+					data: {
+						"openID": uni.getStorageSync("openid"),
+						"eventID": this.events[index].eventId
+					},
+					success: (res) => {
+						console.log(res)
+						if (res.statusCode === 200) {
+							this.events[index].isCollected = this.events[index].isCollected == 0 ? 1 : 0
+						} else {
+							console.error('Error: Server returned status code:', res.statusCode)
+						}
+					},
+					fail: (error) => {
+						console.error('Error fetching activities:', error)
+					}
+				});
 			}
 		},
 	},

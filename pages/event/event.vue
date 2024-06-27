@@ -19,6 +19,7 @@ export default {
 	methods: {
 		back() {
 			console.log("back")
+			//TODO 如果深度为0则跳转至首页
 			uni.navigateBack({
 				delta: 1
 			})

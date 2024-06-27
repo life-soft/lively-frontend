@@ -31,6 +31,7 @@ const _sfc_main = {
                 code: loginRes.code
               },
               success(res) {
+                console.log(res);
                 if (res.data.code !== 200) {
                   reject(new Error("获取openid失败：", res.data.msg));
                   return;
@@ -74,7 +75,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       titleImage: false,
       title: "登录"
     }),
-    c: common_assets._imports_0$1,
+    c: common_assets._imports_0$2,
     d: common_assets._imports_1$1,
     e: common_vendor.o((...args) => $options.wxLogin && $options.wxLogin(...args))
   };

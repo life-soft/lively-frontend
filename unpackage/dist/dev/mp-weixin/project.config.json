@@ -21,17 +21,7 @@
   "libVersion": "3.4.3",
   "appid": "wx9f2c6cc22679ab16",
   "projectname": "temp",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/login/wxLogin",
-          "pathName": "pages/login/wxLogin",
-          "query": ""
-        }
-      ]
-    }
-  },
+  "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

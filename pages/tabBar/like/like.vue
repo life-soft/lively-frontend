@@ -2,6 +2,10 @@
 	<uni-nav-bar :fixed="true" background-color="#ffffff" statusBar="true"	/>
 	<view>
 		<event-card-list :events="events"></event-card-list>
+		<view v-if="noEvent" class="no-liked">
+			<image src="@/static/go-shopping.png"></image>
+			<text class="remind">快去收藏你喜欢的活动吧！</text>
+		</view>
 	</view>
 </template>
 
@@ -23,12 +27,16 @@ export default {
 	mounted() {
 		this.getEvents();
 	},
+	onPullDownRefresh() {
+		this.getEvents();	
+	},
 	components: {
 		eventCardList
 	},
 	data() { 
 		return {
-			events: []
+			events: [],
+			noEvent: false,
 		}
 	},
 	computed: {
@@ -36,16 +44,26 @@ export default {
 
 	methods: {
 		getEvents() {
-			const apiUrl = 'http://124.222.92.30:8080/system/event/list';
+			const apiUrl = 'http://124.222.92.30:8080/system/event/collectList';
 			uni.request({
 				url: apiUrl,
-				method: 'GET', 
+				method: 'POST',
+				// header: { 'content-type': 'application/x-www-form-urlencoded', },
+				data: {
+					"openID": uni.getStorageSync("openid")
+				},
 				success: (res) => {
 					if (res.statusCode === 200) {
+						if (res.data.total == 0) {
+							this.events = []
+							this.noEvent = true
+							return 
+						}
+						this.noEvent = false
 						this.events = res.data.rows
 						console.log(this.events)
 						for (let i = 0; i < this.events.length; i++) {
-							this.events[i].userLike = true //TODO
+							this.events[i].isCollected = 1 //TODO
 						}
 					} else {
 						console.error('Error: Server returned status code:', res.statusCode)
@@ -79,6 +97,19 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.no-liked {
+	margin-top: 200rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 40rpx;
+	.remind {
+		font-size: 50rpx;
+		font-weight: bold;
+		color: $uni-color-primary;
+	}
+}
 
 </style>

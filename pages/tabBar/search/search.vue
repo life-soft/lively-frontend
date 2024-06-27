@@ -89,9 +89,6 @@ export default {
 				success: (res) => {
 					if (res.statusCode === 200) {
 						this.events = res.data.rows
-						for (let i = 0; i < this.events.length; i++) {
-							this.events[i].userLike = false //TODO
-						}
 					} else {
 						console.error('Error: Server returned status code:', res.statusCode)
 					}

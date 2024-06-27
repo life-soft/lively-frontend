@@ -43,9 +43,6 @@ const _sfc_main = {
         success: (res) => {
           if (res.statusCode === 200) {
             this.events = res.data.rows;
-            for (let i = 0; i < this.events.length; i++) {
-              this.events[i].userLike = false;
-            }
           } else {
             console.error("Error: Server returned status code:", res.statusCode);
           }
@@ -128,7 +125,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       ["background-color"]: "#ffffff",
       statusBar: "true"
     }),
-    b: common_assets._imports_0,
+    b: common_assets._imports_0$1,
     c: common_vendor.o(($event) => $options.search()),
     d: $data.searchInput,
     e: common_vendor.o(($event) => $data.searchInput = $event.detail.value),
