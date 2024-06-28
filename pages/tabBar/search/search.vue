@@ -29,16 +29,16 @@
 		<view class="header">
 			<image class="icon" @click="closeDrawer()" src="@/static/icons/arrow-left.png"></image>
 			<view class="title">筛选</view>
-			<view class="clear" @click="clearAllTags()">清空</view>
+			<view class="clear" @click="cleartags()">清空</view>
 		</view>
 		<view class="content" scroll-y="true">
-			<view class="filter-title">活动分类</view>
-			<view v-for="(tag, index) in AllTags" :key="index" 
+			<view class="filter-title">活动类型</view>
+			<view v-for="(tagInfo, index) in tagsInfo" :key="index" 
 				class="tag-filter" 
-				:style="{color: isTagPicked(tag) ? 'white' : '#333538', backgroundColor: isTagPicked(tag) ? '#ef756e' : '#fff5ee'}" 
-				@click="clickTag(tag)"
+				:style="{color: isTagPicked(tagInfo.tagName) ? 'white' : '#333538', backgroundColor: isTagPicked(tagInfo.tagName) ? '#ef756e' : '#fff5ee'}" 
+				@click="clickTag(tagInfo.tagName)"
 			>
-				{{tag}}
+				{{tagInfo.tagName}}
 			</view>
 		</view>
 		<view class="footer">
@@ -57,10 +57,10 @@ export default {
 		return {
 			events: [],
 			searchInput: "",
-			tagsPicked: ["阿巴巴"], // 还是用boolean表？
+			tagsPicked: [], // 还是用boolean表？
 			tagsPickedTemp: [],
 			
-			AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"] // TO BE DELETED
+			tagsInfo: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"] // TO BE DELETED
 		}
 	},
 	computed: {
@@ -74,11 +74,15 @@ export default {
 			return (uni.getSystemInfoSync().statusBarHeight + 44) + 'px' // 导航栏高度44px
 		}
 	},
+	onPullDownRefresh() {
+		this.getEvents()
+	},
 	onShow() {
-		this.getEvents();	
+		this.getEvents()
 	},
 	mounted() {
 		this.getEvents()
+		this.getTags()
 	},
 	methods: {
 		getEvents() {
@@ -122,7 +126,7 @@ export default {
 			this.$refs.showRight.close()
 			// TODO: search again
 		},
-		clearAllTags() {
+		cleartags() {
 			this.tagsPickedTemp = []
 		},
 		isTagPicked(tag) {
@@ -137,6 +141,23 @@ export default {
 			} else {
 				this.tagsPickedTemp.push(tag)
 			}
+		},
+		getTags() {
+			const apiUrl = 'http://124.222.92.30:8080/system/tag/list';
+			uni.request({
+				url: apiUrl,
+				method: 'GET', 
+				success: (res) => {
+					if (res.statusCode === 200) {
+						this.tagsInfo = res.data.rows
+					} else {
+						console.error('Error: Server returned status code:', res.statusCode)
+					}
+				},
+				fail: (error) => {
+					console.error('Error fetching activities:', error)
+				}
+			});
 		}
 	},
 	onShareAppMessage(res) {
@@ -241,7 +262,7 @@ export default {
 		.icon {
 			height: 30rpx;
 			width: 30rpx;
-			margin: 5rpx;
+			margin: 5rpx 8rpx;
 		}
 	}
 	

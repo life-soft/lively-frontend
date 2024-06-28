@@ -10,10 +10,10 @@ const _sfc_main = {
     return {
       events: [],
       searchInput: "",
-      tagsPicked: ["阿巴巴"],
+      tagsPicked: [],
       // 还是用boolean表？
       tagsPickedTemp: [],
-      AllTags: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"]
+      tagsInfo: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"]
       // TO BE DELETED
     };
   },
@@ -28,11 +28,15 @@ const _sfc_main = {
       return common_vendor.index.getSystemInfoSync().statusBarHeight + 44 + "px";
     }
   },
+  onPullDownRefresh() {
+    this.getEvents();
+  },
   onShow() {
     this.getEvents();
   },
   mounted() {
     this.getEvents();
+    this.getTags();
   },
   methods: {
     getEvents() {
@@ -73,7 +77,7 @@ const _sfc_main = {
       this.tagsPicked = this.tagsPickedTemp.slice();
       this.$refs.showRight.close();
     },
-    clearAllTags() {
+    cleartags() {
       this.tagsPickedTemp = [];
     },
     isTagPicked(tag) {
@@ -88,6 +92,23 @@ const _sfc_main = {
       } else {
         this.tagsPickedTemp.push(tag);
       }
+    },
+    getTags() {
+      const apiUrl = "http://124.222.92.30:8080/system/tag/list";
+      common_vendor.index.request({
+        url: apiUrl,
+        method: "GET",
+        success: (res) => {
+          if (res.statusCode === 200) {
+            this.tagsInfo = res.data.rows;
+          } else {
+            console.error("Error: Server returned status code:", res.statusCode);
+          }
+        },
+        fail: (error) => {
+          console.error("Error fetching activities:", error);
+        }
+      });
     }
   },
   onShareAppMessage(res) {
@@ -152,14 +173,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     q: common_vendor.o(($event) => $options.closeDrawer()),
     r: common_assets._imports_4,
-    s: common_vendor.o(($event) => $options.clearAllTags()),
-    t: common_vendor.f($data.AllTags, (tag, index, i0) => {
+    s: common_vendor.o(($event) => $options.cleartags()),
+    t: common_vendor.f($data.tagsInfo, (tagInfo, index, i0) => {
       return {
-        a: common_vendor.t(tag),
+        a: common_vendor.t(tagInfo.tagName),
         b: index,
-        c: $options.isTagPicked(tag) ? "white" : "#333538",
-        d: $options.isTagPicked(tag) ? "#ef756e" : "#fff5ee",
-        e: common_vendor.o(($event) => $options.clickTag(tag), index)
+        c: $options.isTagPicked(tagInfo.tagName) ? "white" : "#333538",
+        d: $options.isTagPicked(tagInfo.tagName) ? "#ef756e" : "#fff5ee",
+        e: common_vendor.o(($event) => $options.clickTag(tagInfo.tagName), index)
       };
     }),
     v: common_vendor.o(($event) => $options.filterSubmit()),

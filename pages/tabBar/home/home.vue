@@ -31,7 +31,6 @@ export default {
 	methods: {
 		getEvents() {
 			const apiUrl = 'http://124.222.92.30:8080/system/event/list';
-			console.log("open",uni.getStorageSync("openid"))
 			uni.request({
 				url: apiUrl,
 				method: 'POST', 

@@ -91,7 +91,7 @@
 .filters .tag-filter .icon.data-v-b667569c {
   height: 30rpx;
   width: 30rpx;
-  margin: 5rpx;
+  margin: 5rpx 8rpx;
 }
 .results-count.data-v-b667569c {
   margin-left: 30rpx;
