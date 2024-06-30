@@ -60,7 +60,7 @@ export default {
 			tagsPicked: [], // 还是用boolean表？
 			tagsPickedTemp: [],
 			
-			tagsInfo: ["阿巴巴", "乌啦啦", "哇嘎嘎", "嘿呦喂", "哎呀呀", "哎哟哇"] // TO BE DELETED
+			tagsInfo: []
 		}
 	},
 	computed: {

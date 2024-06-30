@@ -24,6 +24,11 @@
 			"path": "pages/login/wxLogin",
 			"style": {
 			}
+		},
+		{
+			"path": "pages/externalPage/externalPage",
+			"style": {
+			}
 		}
 	],
 	"globalStyle": {

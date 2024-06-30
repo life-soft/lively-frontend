@@ -7,6 +7,7 @@ if (!Math) {
   "./pages/tabBar/search/search.js";
   "./pages/event/event.js";
   "./pages/login/wxLogin.js";
+  "./pages/externalPage/externalPage.js";
 }
 const _sfc_main = {
   onLaunch: function() {

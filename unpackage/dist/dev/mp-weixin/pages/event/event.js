@@ -1,12 +1,10 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
-  components: {
-    externalPage
-  },
   data() {
     return {
       eventId: "",
+      wxUrl: "https://mp.weixin.qq.com/s/kgki3VirEmFSjIA-ujTUhQ",
       wxContent: ""
     };
   },
@@ -27,9 +25,8 @@ const _sfc_main = {
       });
     },
     getWxContent() {
-      const apiUrl = "https://mp.weixin.qq.com/s/kgki3VirEmFSjIA-ujTUhQ";
       common_vendor.index.request({
-        url: apiUrl,
+        url: this.wxUrl,
         method: "GET",
         success: (res) => {
           console.log("res", res);
@@ -46,6 +43,12 @@ const _sfc_main = {
           console.error("Error fetching activities:", error);
         }
       });
+    },
+    seeOriginalContent() {
+      common_vendor.index.navigateTo({
+        url: "/pages/externalPage/externalPage?url=" + this.wxUrl,
+        animationType: "slide-in-right"
+      });
     }
   },
   onShareAppMessage() {
@@ -55,8 +58,7 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_nav_bar2 = common_vendor.resolveComponent("uni-nav-bar");
-  const _component_external_page = common_vendor.resolveComponent("external-page");
-  (_easycom_uni_nav_bar2 + _component_external_page)();
+  _easycom_uni_nav_bar2();
 }
 const _easycom_uni_nav_bar = () => "../../uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.js";
 if (!Math) {
@@ -72,9 +74,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       color: "#333538",
       ["left-icon"]: "left"
     }),
-    c: common_vendor.p({
-      url: "https://www.baidu.com"
-    }),
+    c: common_vendor.o(($event) => $options.seeOriginalContent()),
     d: $data.wxContent
   };
 }

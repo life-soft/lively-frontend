@@ -4,7 +4,8 @@
     "pages/tabBar/like/like",
     "pages/tabBar/search/search",
     "pages/event/event",
-    "pages/login/wxLogin"
+    "pages/login/wxLogin",
+    "pages/externalPage/externalPage"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

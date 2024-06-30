@@ -3,19 +3,16 @@
 		color="#333538" left-icon="left" @clickLeft="back" 
 	/>
 	<view>eventDetail</view>
-	<external-page url="https://www.baidu.com"></external-page>
-	
+	<text @click="seeOriginalContent()">查看原文</text>
 	<rich-text style="padding: 1em;" :nodes="wxContent"/>
 </template>
 
 <script>
 export default {
-	components: {
-		externalPage,
-	},
 	data() {
 		return {
 			eventId: "",
+			wxUrl: "https://mp.weixin.qq.com/s/kgki3VirEmFSjIA-ujTUhQ",
 			wxContent: "",
 		}
 	},
@@ -36,9 +33,8 @@ export default {
 			})
 		},
 		getWxContent() {
-			const apiUrl = 'https://mp.weixin.qq.com/s/kgki3VirEmFSjIA-ujTUhQ'
 			uni.request({
-				url: apiUrl,
+				url: this.wxUrl,
 				method: 'GET', 
 				success: (res) => {
 					console.log("res", res)
@@ -48,7 +44,6 @@ export default {
 					const end = res.data.indexOf('<div id="js_tags_preview_toast"')
 					html = html.slice(start,end)
 					html = html.replace('visibility: hidden; opacity: 0; ','').replaceAll('data-src','src')
-					// html = html.replace('id=', 'class=').replace('#', '.')
 					this.wxContent = html
 					console.log("html", html)
 				},
@@ -56,9 +51,15 @@ export default {
 					console.error('Error fetching activities:', error)
 				}
 			});
-		}
-
+		},
+		seeOriginalContent() {
+			uni.navigateTo({
+				url: '/pages/externalPage/externalPage?url=' + this.wxUrl,	    
+				animationType: "slide-in-right",
+			});
+		},
 	},
+	
 	onShareAppMessage() {
 		
 	},
